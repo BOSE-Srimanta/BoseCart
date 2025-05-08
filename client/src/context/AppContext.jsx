@@ -19,7 +19,10 @@ export const AppContextProvider = ({children}) =>{
     const [showUserLogin, setShowUserLogin] = useState(false)
     const [products, setProducts] = useState([])
     
-    const [cartItems, setCartItems] = useState({})
+    const [cartItems, setCartItems] = useState(()=> {
+        const savedCart = localStorage.getItem("cartItems");
+        return savedCart ? JSON.parse(savedCart) : {};
+    });
     const [searchQuery, setSearchQuery] = useState({})
 
     //Fetch Seller Status
@@ -42,7 +45,10 @@ export const AppContextProvider = ({children}) =>{
             const {data} = await axios.post('/api/user/is-auth')
             if(data.success){
                 setUser(data.user)
-                setCartItems(data.user.cartItems)
+                
+                if (data.user.cartItems) {
+                    setCartItems(data.user.cartItems) 
+                }
             }
         } catch (error) {
             setUser(null)
@@ -76,6 +82,7 @@ export const AppContextProvider = ({children}) =>{
             cartData[itemId] = 1;
         }
         setCartItems(cartData);
+        localStorage.setItem("cartItems", JSON.stringify(cartData)); // Updated localStorage
         toast.success("Added to the cart")
     }
 
@@ -103,7 +110,7 @@ export const AppContextProvider = ({children}) =>{
 
     //Get Cart Item Count
     const getCartCount = ()=>{
-        let totalCount = 0;4
+        let totalCount = 0;
         for(const item in cartItems){
             totalCount += cartItems[item];
         }
@@ -131,10 +138,18 @@ const getCartAmount = ()=>{
     },[])
 
     //Update Database Cart Item
+
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
+    
+
     useEffect(()=>{
         const updateCart = async ()=>{
             try {
+                console.log("cart Items", cartItems )
                 const {data} = await axios.post('/api/cart/update', {cartItems})
+                console.log("data is present", data)
                 if(!data.success){
                     toast.error(data.message)
                 }
