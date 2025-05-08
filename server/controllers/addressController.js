@@ -4,16 +4,35 @@ import Address from "../models/Address.js"
 
 
 
-export const addAddress = async()=>{
+export const addAddress = async (req, res) => {
     try {
-        const {address, userId} = req.body
-        await Address.create({...address, userId})
-        res.json({success: true, message: "The Address is added Successfully"})
+        console.log("BODY RECEIVED =>", req.body);
+
+        const { address, userId } = req.body;
+
+        if (!address || !userId) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing address or userId",
+            });
+        }
+
+        // Optional: convert pincode to number if needed
+        const fullAddress = {
+            ...address,
+            userId,
+            pincode: Number(address.pincode),
+        };
+
+        await Address.create(fullAddress);
+
+        res.json({ success: true, message: "The Address is added Successfully" });
     } catch (error) {
-        console.log(error.message);
-        res.json({success: false, message: error.message});
+        console.log("Mongoose Error =>", error.message);
+        res.json({ success: false, message: error.message });
     }
-}
+};
+
 
 // Get Address : api/addrees/get
 export const getAddress = async(req, res)=>{

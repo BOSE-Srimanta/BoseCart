@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 const authUser = async (req, res, next)=>{
-    req.body = {}
+    console.log("this is auth user")
+    req.body = {...req.body}
     const {token} = await req.cookies;
     //console.log("COOKIES" , req.cookies)
 
@@ -21,6 +22,7 @@ const authUser = async (req, res, next)=>{
         }else{
             return res.json({ success: false, message: 'Token decode. Id not found' });
         }
+        console.log("moving on to next")
         next();
 
     } catch (error) {
