@@ -46,8 +46,10 @@ const AddAddress = () => {
             
             const { data } = await axios.post('/api/address/add', {
                 userId: user._id,
-                ...address,
-                pincode: Number(address.pincode),
+                address: {
+                    ...address,
+                    pincode: Number(address.pincode),
+                  },
               });
               
             
