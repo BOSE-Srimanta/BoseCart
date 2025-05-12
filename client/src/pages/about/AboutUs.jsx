@@ -21,7 +21,7 @@ const AboutUs = () => {
 
         <div className='flex flex-col items-center mt-4'>
            <p className='md:text-2xl text-sm text-center'>
-                At GreenCart, we make grocery shopping simple, fast, and fresh. Our mission is to deliver high-quality groceries—from farm-fresh fruits to daily essentials—right to your doorstep. We source from trusted suppliers, ensure timely delivery, and offer competitive prices so you can shop with confidence. Built with care by a passionate team, GreenCart is committed to providing a smooth and eco-friendly online shopping experience. Whether you're a busy professional or a home cook, we're here to make your life easier—one delivery at a time.
+                At BoseCart, we make grocery shopping simple, fast, and fresh. Our mission is to deliver high-quality groceries—from farm-fresh fruits to daily essentials—right to your doorstep. We source from trusted suppliers, ensure timely delivery, and offer competitive prices so you can shop with confidence. Built with care by a passionate team, BoseCart is committed to providing a smooth and eco-friendly online shopping experience. Whether you're a busy professional or a home cook, we're here to make your life easier—one delivery at a time.
             </p> 
             <p className='md:text-2xl tex-sm text-center mt-2 uppercase'>Fresh groceries. Delivered with care. 👍</p>
         </div>

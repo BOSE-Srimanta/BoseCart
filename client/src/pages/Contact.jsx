@@ -1,14 +1,36 @@
 import React from "react";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 const Contact = () => {
 
     //For Using Toast Message like Notification on Submit Button
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        toast.success("Srimanta Bose(Developer of this Website) will get back to you Shortly");
-        e.target.reset(); //Clear the Form
-      };
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const message = form.message.value;
+
+    try {
+      const { data } = await axios.post("/api/contact/submit", {
+        name,
+        email,
+        phone,
+        message,
+      });
+
+      if (data.success) {
+        toast.success("Thank you Amigo, For Sharing your thought!🤩 Srimanta Bose(Developer of this website) will get back to you very soon. ✅");
+        form.reset();
+      } else {
+        toast.error(data.message || "Failed to send message.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please Try again.");
+    }
+  };
 
   return (
 
@@ -26,7 +48,7 @@ const Contact = () => {
           <label className="text-black/70" htmlFor="name">
             Your Name
           </label>
-          <input
+          <input name="name"
             className="h-12 p-2 mt-2 w-full border border-gray-500/30 rounded outline-none focus:border-primary"
             type="text" placeholder="Your Name Please"
             required
@@ -37,7 +59,7 @@ const Contact = () => {
           <label className="text-black/70" htmlFor="name">
             Your Email
           </label>
-          <input
+          <input name="email"
             className="h-12 p-2 mt-2 w-full border border-gray-500/30 rounded outline-none focus:border-primary"
             type="email" placeholder="Your email address"
             required
@@ -48,7 +70,7 @@ const Contact = () => {
           <label className="text-black/70" htmlFor="name">
             Your Phone Number
           </label>
-          <input
+          <input name="phone"
             className="h-12 p-2 mt-2 w-full border border-gray-500/30 rounded outline-none focus:border-primary"
             type="text" placeholder="Your Contact Number Please"
             required
@@ -61,7 +83,7 @@ const Contact = () => {
         <label className="text-black/70" htmlFor="name">
           Message
         </label>
-        <textarea
+        <textarea name="message"
           className="w-full mt-2 p-2 h-40 border border-gray-500/30 rounded resize-none outline-none focus:border-primary" placeholder="Write Your Thought Here.."
           required
         ></textarea>
