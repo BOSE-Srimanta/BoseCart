@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import ProfileImg from './profile.jpg.jpg';
-import { assets } from '../../assets/assets'
+import { assets } from '../../assets/assets';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
 
 const AboutUs = () => {
+
+  useEffect(() => {
+    // AboutUs Page visit tracking API call
+    axios.post('/api/track/aboutus', { page: 'AboutUs' })
+      .then(res => console.log("Hey Amigo! Visiting tracked successfully"))
+      .catch(err => console.error("Sorry Amigo! Failed to track visit", err));
+  }, []);
+
   return (
     <div>
       
       <div className='flex justify-center'>
         <Link className="mb-8 md:mb-12" to='/'>
-        <img className="w-48 md:w-68 mt-4" src={assets.logo} alt="logo" />
+        <img className="w-24 md:w-32 mt-4" src={assets.logo} alt="logo" />
     </Link>
       </div>
       

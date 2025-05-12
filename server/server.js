@@ -13,6 +13,7 @@ import orderRouter from './routes/orderRoute.js';
 import { stripeWebhooks } from './controllers/orderController.js';
 
 import contactRouter from './routes/contactRoute.js';
+import aboutusRouter from './routes/aboutusRoute.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -40,6 +41,7 @@ app.use('/api/address', addressRouter)
 app.use('/api/order', orderRouter)
 
 app.use('/api/contact', contactRouter);
+app.use('/api/track', aboutusRouter);
 
 
 
