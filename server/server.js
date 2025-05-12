@@ -27,11 +27,10 @@ const allowedOrigins = ['http://localhost:5173', 'https://bose-cart.vercel.app']
 app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
 //Middleware COnfiguration
-app.use(cors({origin: allowedOrigins, credentials: true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors({origin: allowedOrigins, credentials: true}));
 
 app.get('/', (req, res) => res.send("Hello Bose! API is Working"));
 app.use('/api/user', userRouter)
