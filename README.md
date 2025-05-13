@@ -20,12 +20,10 @@
 <li>How Client Site Work from React.js</li>
 <li>How Server Site work from Node.js & Express.js</li>
 <li>How Database work from MongoDB CLuster. </li>
-<li>Handling Shcema Support on Cluster Collection of data.</li>
 <li>How Static Page work on the Database Site</li>
 <li>How Dynamic Page work on the Database Site</li>
 <li>How to Control my React Frontend and Express Backend in Different Origin. It can accessable through Cors(Cross-Origin Resource Sharing) enabled Used.</li>
-<li>How to Handling Cookies on client site by Cookie-parser</li>
-<li>Image Uploaded by Admin are securely store on Cloudinary.</li>
+
 
 <br> If you want to visit on my LinkedIn Profile, You're always Welcome. 
 <br> Here is the link <a href= "https://www.linkedin.com/in/srimanta-bose-753375250/">Srimanta Bose</a>
